@@ -14,17 +14,10 @@
   <div id="app">
 
     <h1 class="display-1 text-center text-white">AirDraw<span><img class="ml-3" height="70" src="../assets/img/pencil.png"></span></h1>
-    <div class="container rounded shadow">
-
-    <form @submit.prevent>
-      <div class="input-group mb-3">
-        <input v-model="username" type="text" class="form-control" placeholder="Nickname" required>
-        <input v-model="gameId" type="text" class="form-control col-sm-4" placeholder="Lobby ID" required>
-      </div>
-      <div class="form-group mb-2">
-        <input @click="startGame" type="submit" class="btn btn-success form-control" value="Play">
-      </div>
-      <input type="submit" class="btn btn-success form-control" value="Create Lobby"></input>
+    <div class="container rounded shadow p-3">
+    <form @submit.prevent="startGame">
+        <input v-model="username" type="text" class="form-control mb-3" placeholder="Nickname" required>
+        <input type="submit" class="btn btn-success form-control" value="Play">
     </form>
     </div>
   </div>

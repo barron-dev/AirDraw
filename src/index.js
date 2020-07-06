@@ -8,9 +8,7 @@ var vue = new Vue({
     },
     methods:{
         startGame: function(){
-            if(this.username != null){
-                window.location = 'lobby.html?username=' + this.username
-            }
+            window.location = 'lobby.html?username=' + this.username
         }
     }
 })

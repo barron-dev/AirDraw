@@ -19,7 +19,7 @@
     <form @submit.prevent>
       <div class="input-group mb-3">
         <input v-model="username" type="text" class="form-control" placeholder="Nickname" required>
-        <input v-model="gameId" type="text" class="form-control col-sm-4" placeholder="Lobby ID">
+        <input v-model="gameId" type="text" class="form-control col-sm-4" placeholder="Lobby ID" required>
       </div>
       <div class="form-group mb-2">
         <input @click="startGame" type="submit" class="btn btn-success form-control" value="Play">

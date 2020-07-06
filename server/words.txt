@@ -1,0 +1,10 @@
+balloon
+diamond
+tree
+house
+building
+nose
+arm
+leg
+finger
+tongue

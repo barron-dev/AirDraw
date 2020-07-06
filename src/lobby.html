@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Lobby</title>
+
+    <script src="modules/vue.min.js"></script>
+    <script src="modules/socket.io-2.3.0.js"></script>
+
+    <script>let $ = require('jquery');</script>
+    <script>require('popper.js');</script>
+    <script>require('bootstrap');</script>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../assets/css/lobby.css">
+    <link rel="stylesheet" href="../assets/css/modal.css">
+</head>
+
+<body>
+    <div id="app" class="wrapper">
+        <div v-if="!ready" class="container rounded shadow">
+            <h1>Lobby</h1>
+            <!-- <p>{{gameId}}</p> -->
+            <p class="text-danger" v-if="error">Cannot establish a connection</p>
+            <hr>
+            <ul id="lobbylist">
+                <li v-for="player in players">{{player.name}}</li>
+            </ul>
+            <div style="text-align: center; margin-top: 20px;">
+                <button v-if="leader" class="btn btn-success" @click="startGame">Start Game</button>
+            </div>
+        </div>
+
+        <div v-if="ready" class="wrapper">
+            <div id="toppane">
+                <div id="infopanel">
+                    <div style="display: flex; flex-direction: row;">
+                        <img src="../assets/img/clock.png">
+                        <countdown style="display: inline;" class="cd" :time="roundTime" ref="timer"
+                            v-on:finished="countdownFinished"></countdown>
+                    </div>
+                    <p class="word">{{currentWord}}</p>
+                    <p class="round">Round {{currentRound}} of {{roundCount}}</p>
+                </div>
+            </div>
+
+            <div id="leftpane">
+                <div class="panel">
+                    <h2>Players</h2>
+                    <hr class="list-separator">
+                    <ul class="player-list list-group">
+                        <li v-for="p in players" class="list-group-item">
+                            <div style="margin-left: 0.5em;">
+                                <p style="color: green; font-size: 1.5em; font-weight: bolder;">{{p.name}}</p>
+                                <p>Score: {{p.score}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="middlepane">
+                <modal v-if="showWordModal">
+                    <div class="word-container">
+                        <h2>You're up!</h2>
+                        <div class="flex-container">
+                            <button v-for="word in wordOptions" @click="wordSelected(word)">{{word}}</button>
+                        </div>
+                    </div>
+                </modal>
+                <modal v-if="showPlayerModal">
+                    <div>
+                        <h1 style="color: white; font-size: 3em;">{{getName(currentPlayer)}} is choosing a word</h1>
+                    </div>
+                </modal>
+                <modal v-if="showScoreModal">
+                    <div class="score-container">
+                        <ul>
+                            <li v-for="(player, i) in scores">
+                                <small><strong>#{{i+1}}</strong></small> {{player.name}}
+                            </li>
+                        </ul>
+                        <button @click="mainMenu" class="btn btn-success" style="margin: auto;">Main Menu</button>
+                    </div>
+                </modal>
+                <div id="drawpanel">
+                    <div class="wrapper">
+                        <drawing :enabled="canDraw" ref="board" v-on:draw="handleDraw"></drawing>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rightpane">
+                <div class="panel">
+                    <h2>Chat</h2>
+                    <hr class="list-separator">
+                    <ul class="chat-list">
+                        <li v-for="msg in chat">
+                            <div v-if="msg.type == 1">
+                                <strong>{{msg.name}}:</strong> {{msg.text}}
+                            </div>
+                            <div v-if="msg.type == 2" style="color: green;">
+                                <strong>{{msg.text}}</strong>
+                            </div>
+                        </li>
+                    </ul>
+                    <div>
+                        <input type="text" v-model="message" v-on:keyup.enter="sendMsg">
+                        <button class="btn-primary" v-on:click="sendMsg">Send</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="components/drawing.js"></script>
+    <script src="components/countdown.js"></script>
+    <script src="components/modal.js"></script>
+    <script src="lobby.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,182 @@
+body{
+    background-image: url("../img/bg-main-blur.jpg");
+}
+
+.container{
+    width: 500px;
+    padding: 10px;
+    margin-top: 50px;
+    background: white;
+}
+
+h1{
+    text-align: center;
+    font-weight: normal;
+}
+
+.container > p{
+    text-align: center;
+    /* font-weight: bolder; */
+}
+
+#lobbylist{
+    list-style-type: none;
+    margin:0 auto 0;
+    width: 350px;
+    padding: 0;
+}
+
+#lobbylist > li{
+    background: deepskyblue;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: 10px 0px;
+    padding: 15px;
+    transition: .1s;
+}
+
+#lobbylist > li:hover{
+    transform: scale(1.02);
+}
+
+/* ----- */
+
+body, html {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+
+.panel {
+    background-color: rgba(255,255,255,0.90);
+    padding: 5px;
+    border-radius: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#drawpanel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#infopanel{
+    /* text-align: center; */
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+#toppane {
+    height: 7%;
+    border-collapse: collapse;
+    padding: 5px;
+  }
+
+#middlepane {
+    height: 100%;
+    width: 50%;
+    float: left;
+    border-collapse: collapse;
+}
+
+#leftpane, #rightpane, #middlepane {
+    padding: 10px;
+    height: 93%;
+    border-collapse: collapse;
+}
+
+#leftpane {
+    width: 20%;
+    height: auto;
+    float: left;
+}
+
+#rightpane {
+    width: 30%;
+    float: right;
+    position: relative;
+}
+
+.chat-list {
+    list-style: none;
+    margin: 0 0 10px;
+    padding: 5px;
+    height: 100%;
+    overflow: scroll;
+}
+
+.chat-list::-webkit-scrollbar {
+  display: none;
+}
+
+.player-list {
+    list-style: none;
+    margin: 0 0 10px;
+    padding: 5px;
+    height: 100%;
+}
+
+.player-list li {
+    padding: 5px;
+}
+
+.player-list p {
+    margin: 0px;
+}
+
+.chat-list li {
+    padding: 5px;
+}
+
+.chat-list li:nth-child(even) {
+    background-color: rgba(188, 239, 255, 0.35);
+}
+
+.list-separator {
+    margin: 0px 0px auto;
+}
+
+.word {
+    font-size: 4vh;
+    margin: 0;
+}
+
+.round {
+    font-size: 3vh;
+    margin: 0;
+}
+
+.cd {
+    font-size: 4vh;
+    margin: 0;
+}
+
+
+img {
+    height: 4vh;
+    margin-right: 0.5em;
+    align-self: center;
+}
+
+#rightpane input {
+    width: 70%;
+}
+
+#rightpane button {
+    width: 25%;
+}

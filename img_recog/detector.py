@@ -91,10 +91,11 @@ class Color_Track:
             circle_area = np.pi*(radius)**2
             proportion = (circle_area/cnt_area)
             
-            if proportion>50:return("MOV")
-            if proportion<50 and proportion>5:return("DRW")
-            if proportion<5:return("ERS")
+            if proportion>2.2 and proportion <5:return("MOV")
+            if proportion>5:return("DRW")
+            if proportion<2.2:return("ERS")
         except:
+            print("proportion problem occured")
             pass
 
     def _get_xy(self):

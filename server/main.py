@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit1
 from game import Game, Timer
 import threading
 

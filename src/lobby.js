@@ -3,10 +3,9 @@ let vue = new Vue({
     el: '#app',
 
     data: {
-        gameId: '/GameID/',
-        username: new URLSearchParams(window.location.search).get('username'),
+        username: null,
+        useCamera: false,
         userId: null,
-        leader: false,
         isLeader: false,
         ready: false,
         error: false,
@@ -18,7 +17,6 @@ let vue = new Vue({
         wordOptions: [],
         drawing: false,
         canDraw: false,
-        startDraw: null,
         showWordModal: false,
         showPlayerModal: false,
         showScoreModal: false,
@@ -27,6 +25,12 @@ let vue = new Vue({
         roundTime: 0,
         currentPlayer: 0,
         scores: []
+    },
+
+    created() {
+        let usp = new URLSearchParams(window.location.search)
+        this.username = usp.get('username')
+        this.useCamera = (usp.get('useCamera') == 'true')
     },
 
     mounted() {
@@ -41,7 +45,7 @@ let vue = new Vue({
         socket.on('assign-id', (data) => {
             this.userId = data.id
             if (data.players.length === 0)
-                this.leader = true
+                this.isLeader = true
             socket.emit('assign-name', ({
                 name: this.username,
                 id: this.userId
@@ -87,8 +91,7 @@ let vue = new Vue({
         })
 
         socket.on('word-selection', (data) => {
-            //this.canDraw = true
-            this.setC(true)
+            this.canDraw = true
             this.wordOptions = data.words
             this.showWordModal = true
         })
@@ -98,10 +101,7 @@ let vue = new Vue({
                 this.stopCountdown()
                 this.currentPlayer = data.id
                 console.log(`data: ${data.id}, user: ${this.userId}`)
-                //console.log(data.id === this.userId)
-                //this.canDraw = (data.id === this.userId)
-    
-                this.setC(data.id == this.userId)
+                this.canDraw = data.id == this.userId
                 this.$refs.board.resetCanvas()
                 this.showPlayerModal = !this.canDraw
                 this.currentRound = data.round
@@ -127,10 +127,6 @@ let vue = new Vue({
     },
 
     methods: {
-        setC(val){
-            this.canDraw = val
-            console.log('setting to '+val)
-        },
         sendMsg: function () {
             if (!this.canDraw)
                 socket.emit('chat-message', { id: this.userId, type: 1, text: this.message })

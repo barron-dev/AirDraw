@@ -4,11 +4,12 @@ var vue = new Vue({
     el: "#app",
     data:{
         username: null,
-        gameId: null
+        gameId: null,
+        useCamera: false
     },
     methods:{
         startGame: function(){
-            window.location = 'lobby.html?username=' + this.username
+            window.location = `lobby.html?username=${this.username}&useCamera=${this.useCamera}`
         }
     }
 })

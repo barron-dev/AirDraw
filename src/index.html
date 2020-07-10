@@ -17,8 +17,15 @@
     <div class="container rounded shadow p-3">
     <form @submit.prevent="startGame">
         <input v-model="username" type="text" class="form-control mb-3" placeholder="Nickname" required>
-        <input type="submit" class="btn btn-success form-control" value="Play">
+
+        <input type="submit" class="btn btn-success form-control mb-2" value="Play">
+        
+        <div class="custom-control custom-checkbox text-center">
+          <input type="checkbox" v-model="useCamera" class="custom-control-input" id="customCheck">
+          <label class="custom-control-label" for="customCheck">Use Camera</label>
+        </div>
     </form>
+    
     </div>
   </div>
 

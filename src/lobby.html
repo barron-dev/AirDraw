@@ -17,14 +17,13 @@
     <div id="app" class="wrapper">
         <div v-if="!ready" class="container rounded shadow">
             <h1>Lobby</h1>
-            <!-- <p>{{gameId}}</p> -->
             <p class="text-danger" v-if="error">Cannot establish a connection</p>
             <hr>
             <ul id="lobbylist">
                 <li v-for="player in players">{{player.name}}</li>
             </ul>
             <div style="text-align: center; margin-top: 20px;">
-                <button v-if="leader" class="btn btn-success" @click="startGame">Start Game</button>
+                <button v-if="isLeader" class="btn btn-success" @click="startGame">Start Game</button>
             </div>
         </div>
 
@@ -103,13 +102,12 @@
                     </ul>
                     <div>
                         <input type="text" v-model="message" v-on:keyup.enter="sendMsg">
-                        <button class="btn-primary" v-on:click="sendMsg">Send</button>
+                        <button class="btn-primary rounded" v-on:click="sendMsg">Send</button>
                     </div>
                 </div>
             </div>
 
         </div>
-
     </div>
 
     <script src="components/drawing.js"></script>
